@@ -1,0 +1,104 @@
+Lista nº 6
+
+ SELECT 	-- LISTA DE CAMPOS / FUNÇÕES
+ FROM		-- NOME DA TABELA
+ WHERE		-- FILTRA LINHAS ANTES DE AGRUPAR
+ GROUP BY       -- AGRUPA AS LINHAS RESULTANTES
+ HAVING		-- FILTRA LINHAS APÓS AGRUPAR
+ ORDER BY 	-- CLASSIFICA/ORDENA AS LINHAS RESULTANTES
+
+ FUNÇÕES DE GRUPO ==> MIN(), MAX(), AVG(), SUM(), COUNT()
+
+ 34) Consulte o nome do empregado, salário e o número do depart
+ em que trabalha, apresentando dados apenas dos empregados que
+ tem o maior salário por departamento. 
+ Faça o comando utilizando uma subquery.
+ 
+ SELECT ENAME, SAL, DEPTNO
+ FROM EMP
+ WHERE SAL IN (SELECT MAX(SAL) FROM EMP GROUP BY DEPTNO)
+ 
+ 35) Consulte os cargos dos empregados da tabela emp 
+ apresentando a soma dos salários gastos por cargo. 
+ Altere os cabeçalhos para “Cargos” e “Total de Salário” e 
+ classifique por cargo o resultado final.
+ 
+ SELECT JOB AS "CARGOS", SUM(SAL) "TOTAL SALÁRIO"
+ FROM EMP
+ GROUP BY JOB
+ ORDER BY JOB
+ 
+ 36) Selecione todos os dados dos empregados SMITH e TURNER 
+ da tabela EMP.
+ 
+ SELECT *
+ FROM EMP
+ WHERE EMPNO = 7369 OR EMPNO = 7844
+ 
+ 37) O que está errado no comando abaixo?
+	SELECT JOB, AVG(SAL) FROM EMP GROUP BY SAL
+
+	-- FORMA CORRETA (COLUNA JOB NO GROUP BY)
+	SELECT JOB, AVG(SAL) FROM EMP GROUP BY JOB
+	
+ 38) O que está errado no comando abaixo?
+    	UPDATE EMP SAL = 4000 WHERE ENAME = ‘SMITH’
+	
+	-- FORMA CORRETA (FALTOU A CLÁSULA SET)
+	UPDATE EMP SET SAL = 4000 WHERE ENAME = ‘SMITH’
+	
+ 39) O empregado “Smith” foi transferido para o departamento 
+‘OPERATIONS’. Faça essa alteração na tabela EMP.
+ 
+ UPDATE EMP
+ SET
+ DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = 'OPERATIONS')
+ WHERE EMPNO = 7369
+ 
+ 40) Faça uma consulta que mostre quantos funcionários existem 
+ alocados por departamento e a média de salários gastos pelos 
+ departamentos. 
+ 
+ SELECT DEPTNO, COUNT(*), ROUND(AVG(SAL),2)
+ FROM EMP
+ GROUP BY DEPTNO
+ 
+ 41) Selecione o menor salário, o maior salário e a soma dos salários
+ pagos por cargo dentro de cada departamento. Classifique o resultado
+ por departamento.
+ 
+ SELECT DEPTNO, JOB, MIN(SAL), MAX(SAL), SUM(SAL)
+ FROM EMP
+ GROUP BY DEPTNO, JOB
+ ORDER BY DEPTNO
+ 
+ 42) Apague da tabela EMP os empregados que foram admitidos em 87. 
+ Faça um RollBack em seguida.
+ 
+ DELETE FROM EMP 
+ WHERE HIREDATE LIKE '%87'
+ OU
+ WHERE HIREDATE LIKE '__/__/87'
+ OU
+ WHERE HIREDATE BETWEEN '01/01/87' AND '31/12/87'
+ OU
+ WHERE HIREDATE >= '01/01/87' AND HIREDATE <= '31/12/87'
+ 
+ 43) O empregado "James" foi transferido para o departamento 
+ ‘ACCOUNTING’. Faça essa alteração na tabela EMP utilizando uma subquery.
+ 
+ UPDATE EMP
+ SET
+ DEPTNO = (SELECT DEPTNO FROM DEPT WHERE DNAME = 'ACCOUNTING')
+ WHERE EMPNO = 7900
+ 
+ 44) Consulte todos os empregados da tabela EMP que não possuem valores 
+ para o campo que representa a comissão. Traga apenas seu nome, nº do empr
+ e salário, classificados em ordem decrescente de Nome. 
+
+ SELECT ENAME, EMPNO, SAL, COMM
+ FROM EMP
+ WHERE COMM IS NULL
+ ORDER BY ENAME DESC
+
+

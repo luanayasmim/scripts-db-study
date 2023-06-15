@@ -1,0 +1,114 @@
+SELECT		-- LISTA DE CAMPOS
+FROM		-- NOME DA TABELA
+WHERE		-- CONDICIONAL PARA FILTRAR LINHAS NA TABELA
+ORDER BY	-- CLASSIFICAR/ORDENAR AS LINHAS RESULTANTES
+
+LISTA Nº 4
+
+10)	Consulte os campos ENAME, JOB, SAL e HIREDATE da tabela EMP, 
+formatando a data com o mês por extenso e o ano com 4 dígitos.
+
+SELECT ENAME, JOB, SAL, TO_CHAR(HIREDATE, 'DD "de" MONTH "de" YYYY')
+FROM EMP
+
+
+11)	Insira um departamento novo na tabela DEPT, 
+com número do departamento igual a 50, nome do 
+departamento “Orçamento” e localização “São Paulo”.
+
+INSERT INTO DEPT
+(DEPTNO, DNAME, LOC) -- OPCIONAL
+VALUES
+(50, 'Orçamento','SÃO PAULO')
+
+OU
+
+INSERT INTO DEPT
+VALUES
+(50, 'Orçamento','SÃO PAULO')
+
+
+12)	Altere o campo ENAME da tabela EMP, de 10 caracteres 
+para 20 caracteres (manter o mesmo tipo de dado). 
+Verifique, em seguida, a estrutura da tabela com a 
+alteração efetuada.
+
+ALTER TABLE EMP
+MODIFY
+(
+ENAME VARCHAR(20)		
+)
+
+
+13)	Insira um novo empregado na tabela EMP dando valores 
+a todos os campos. Para a coluna referente ao código do 
+departamento coloque o valor 15. Ocorreu algum erro? Explique.
+
+INSERT INTO EMP
+(EMPNO, ENAME, JOB, SAL, MGR, HIREDATE, COMM, DEPTNO)
+VALUES
+(1, 'LUIS', 'ANALISTA', 3800, NULL,  '10/03/20', NULL, 15)
+
+Explique
+
+
+14)	Qual é o comando para se apagar uma constraint de uma
+tabela?
+
+ALTER TABLE NOMETAB DROP CONSTRAINT NOMECONSTR
+
+
+15)	Consulte todos os empregados contratados no ano de 87, 
+mostrando seu nome, salário e número do departamento. 
+
+SELECT
+FROM
+WHERE		-- OPCIONAL
+ORDER BY	-- OPCIONAL
+
+SELECT 	ENAME, SAL, DEPTNO
+FROM 	EMP
+WHERE	HIREDATE LIKE '%87'
+-- OU
+SELECT 	ENAME, SAL, DEPTNO
+FROM 	EMP
+WHERE	HIREDATE LIKE '__/__/87'
+-- OU
+SELECT 	ENAME, SAL, DEPTNO
+FROM 	EMP
+WHERE	HIREDATE BETWEEN '01/01/87' AND '31/12/87'
+-- OU
+SELECT 	ENAME, SAL, DEPTNO
+FROM 	EMP
+WHERE	HIREDATE >= '01/01/87' AND HIREDATE <= '31/12/87'
+
+
+16)	Consulte o nome dos empregados, seu cargo e salário, 
+classificados em ordem crescente por cargo e nome do 
+empregado, nesta ordem.
+
+SELECT ENAME, JOB, SAL
+FROM EMP
+ORDER BY JOB, ENAME 
+
+
+17)	Consulte o nome dos empregados, seu cargo, data de admissão, além
+ de apresentar quantas semanas existem entre a data de hoje e data em
+ que foram admitidos. Coloque um apelido para a última coluna como 
+ “Semanas”.
+ 
+ SELECT ENAME, JOB, HIREDATE, ROUND((SYSDATE - HIREDATE) / 7) AS SEMANAS
+ FROM EMP
+
+	
+18)	Insira um novo empregado na tabela EMP, sem número do
+empregado. Verifique a mensagem do Oracle!!!
+
+INSERT INTO EMP
+(EMPNO, ENAME, JOB, SAL)
+VALUES
+(NULL, 'JOAO', 'ANALISTA', 2700)
+
+
+
+

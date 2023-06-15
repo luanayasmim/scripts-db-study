@@ -1,0 +1,163 @@
+Lista nº 5
+
+ SELECT 	-- LISTA DE CAMPOS
+ FROM		-- NOME DA TABELA
+ WHERE		-- CONDICIONAL PARA FILTRAR LINHAS
+ GROUP BY       -- AGRUPA AS LINHAS RESULTANTES
+ ORDER BY 	-- CLASSIFICA/ORDENA AS LINHAS RESULTANTES
+
+ 19) Consulte o campo DEPTNO da tabela EMP, alterando o
+ cabeçalho para ‘Número do departamento’, além de 
+ apresentar o menor salário, maior salário, média salarial 
+ por departamento. 
+ 
+ SELECT DEPTNO AS "NUM DEPTO", MIN(SAL), MAX(SAL), ROUND(AVG(SAL),2)
+ FROM EMP
+ GROUP BY DEPTNO 
+ 
+ 20) Consulte o nome dos empregados, seu cargo, data de 
+ admissão, além de apresentar quantas semanas existem entre 
+ a data de hoje e data em que foram admitidos. 
+ Coloque um apelido para a última coluna como “Semanas”.
+ 
+SELECT 	ENAME, JOB, HIREDATE, TRUNC((SYSDATE - TO_DATE(HIREDATE, 'DD/MM/YYYY')) / 7) AS SEMANAS
+FROM 	EMP
+ 
+ 21) Crie uma cópia da tabela ALUNO (com todos os campos da 
+ tabela), chamada COPIAALUNO. Utilize para isso o comando 
+ SELECT. Apague esta tabela logo em seguida.
+ 
+ CREATE TABLE COPIAALUNO
+ AS
+ SELECT * FROM ALUNO
+ 
+ DROP TABLE COPIAALUNO
+ 
+ 22) Consulte a quantidade de funcionários por departamento 
+ da tabela EMP.
+ 
+ SELECT DEPTNO, COUNT(*)
+ FROM EMP
+ GROUP BY DEPTNO
+ 
+ 23) Qual o custo dos empregados por departamento?
+ 
+ SELECT DEPTNO, SUM(SAL)
+ FROM EMP
+ GROUP BY DEPTNO
+
+ 24) Faça uma consulta que apresente todos os alunos
+ matriculados no período de 15/03/08 a 30/04/08, 
+ mostrando apenas seu Código, Nome e Data de Nascimento,
+ classificados por Nome.  Altere os cabeçalhos para 
+ Cód.Aluno, Nome Aluno e Data Nasc, respectivamente.
+ 
+ SELECT 	IDALUNO AS "Cód.Aluno", NOME "NOME ALUNO", 
+ DTNASC AS "DATA NASC"
+ FROM		ALUNO
+ WHERE 		DTMATRIC >= '15/03/08' AND DTMATRIC <= '30/04/08'
+ ORDER BY 	NOME 
+ 
+ 25) O aluno Mauro Soares fez o pagamento referente ao mês de
+ Novembro no dia 16/10/08 no valor de R$ 260,00. Seu professor
+ é o Gerson Almeida e o código do registro do pagamento é 
+ 78400. Escreva o comando para cadastrar essa informação na 
+ tabela PAGTO.
+ 
+ INSERT INTO PAGTO
+ (IDPAGTO, IDALUNO, DTPAGTO, VALLIQ, IDPROF)  -- OPCIONAL
+ VALUES
+ (78400, 10443,TO_DATE('16-10-08', 'DD-MON-YY'), 260.00, 'GA')
+ 
+ 26)Faça uma consulta que traga todos os pagamentos da aluna 
+ Paola Moraes, mostrando apenas as colunas correspondentes ao
+ código do professor, data do pagamento e valor, apresentando
+ os cabeçalhos Professor, Data Pagto e Valor Pago, respectivamente.
+ 
+ SELECT IDPROF AS PROFESSOR, DTPAGTO AS "DATA PAGTO", 
+ VALLIQ AS "VALOR PAGO"
+ FROM 	PAGTO
+ WHERE IDALUNO = 10468
+ 
+ 27) O aluno Pedro Santos saiu da academia e seu registro 
+ deve ser eliminado da tabela ALUNO. Para que isso ocorra é 
+ necessário excluir primeiro os registros de pagamentos 
+ desse aluno. Escreva o comando para executar a ação solicitada 
+ referente aos registros de pagamentos da tabela PAGTO.
+ 
+ DELETE FROM PAGTO WHERE IDALUNO = 10080
+ 
+ 28) Será necessário adicionar uma nova coluna na tabela ALUNO para 
+ guardar o CPF, que deve ser do tipo VARCHAR(15). Essa coluna deverá
+ conter uma restrição para não permitir valores duplicados. 
+ Escreva o comando necessário para execução dessa tarefa.
+ 
+ ALTER TABLE ALUNO
+ ADD
+ (
+ CPF VARCHAR(15) CONSTRAINT ALUNO_CPF_UU UNIQUE
+ OU
+ CPF VARCHAR(15) UNIQUE
+ )
+ 
+ 29) A data de nascimento do aluno Carlos Lins está incorreta. 
+ No cadastro consta 12/11/1977 quando na realidade é 10/11/1977. 
+ Escreva o comando para corrigir esse dado na tabela ALUNO.
+ 
+ UPDATE ALUNO
+ SET
+ DTNASC = '10/11/1977'
+ WHERE IDALUNO = 10194
+
+30) Os registros de pagamentos do aluno Pedro Santos foram eliminados, conforme solicitado
+no exercício 27, porém, houve uma confusão com relação ao nome do aluno. O aluno que saiu da 
+academia foi o Roberto Santos e não o Pedro Santos. Com o objetivo de retornar a situação 
+anterior à exclusão digite o comando abaixo: ROLLBACK;
+
+ROLLBACK
+
+31) Verifique o que aconteceu com as operações efetuadas nos exercícios nºs 27, 28 e 29 e 
+entenda o porque.
+
+
+32)	Faça uma consulta que apresente o total pago por alunos no ano de 2007 e 
+a média de valores pagos por eles.
+
+SELECT IDALUNO, SUM(VALLIQ), ROUND(AVG(VALLIQ),2)
+FROM PAGTO
+WHERE DTPAGTO BETWEEN '01/01/07' AND '31/12/07' 
+GROUP BY IDALUNO
+
+-- OU
+
+SELECT IDALUNO, SUM(VALLIQ), ROUND(AVG(VALLIQ),2)
+FROM PAGTO
+WHERE DTPAGTO >= '01/01/07' AND DTPAGTO <= '31/12/07' 
+GROUP BY IDALUNO
+
+-- OU
+
+SELECT IDALUNO, SUM(VALLIQ), ROUND(AVG(VALLIQ),2)
+FROM PAGTO
+WHERE DTPAGTO LIKE '%07' 
+GROUP BY IDALUNO
+
+-- OU
+
+SELECT IDALUNO, SUM(VALLIQ), ROUND(AVG(VALLIQ),2)
+FROM PAGTO
+WHERE DTPAGTO LIKE '__/__/07' 
+GROUP BY IDALUNO
+ 
+33) Consulte quantos pagamentos foram feitos para cada 
+ professor no 1º semestre de 2008, classificando por professor.
+ 
+SELECT IDPROF, COUNT(*)
+FROM PAGTO
+WHERE DTPAGTO >= '01/01/08' AND DTPAGTO <= '30/06/08'
+GROUP BY IDPROF
+ORDER BY IDPROF
+
+ 
+
+

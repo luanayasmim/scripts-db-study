@@ -1,0 +1,38 @@
+LISTA DE EXERCÍCIOS - Nº 1 - RESOLUÇÃO
+
+1-) Criar todas as tabelas, de acordo com o modelo relacional/lógico, definindo todas as restrições de chaves e demais restrições mencionadas no modelo.
+
+Os comandos create table dessas tabelas estão nos scripts de criação das tabelas da vídeo locadora.
+
+
+2-) Insira todas os valores apresentados  nas tabelas FILME, CLIENTE, DVD e CATEGORIA. (utilize vários insert’s).
+
+Os comandos insert´s estão junto com os scripts de criação das tabelas da vídeo locadora.
+
+
+3-) Altere o número da categoria Comédia de 01 para 08 na tabela CATEGORIA. 
+
+	UPDATE Categoria set CodCateg = 8 where Codcateg = 1;
+
+	Obs: Esse comando não vai funcionar. Entenda o porque!
+
+
+4-) Insira a coluna SINOPSE na tabela FILME com 300 caracteres.
+
+	ALTER TABLE Filme Add (Sinopse varchar(300));
+
+
+5-) Cadastre uma nova categoria de filme chamada FICÇÃO.
+
+	INSERT into Categoria (CodCateg, Descricao) values (1, ‘Ficção’);
+
+
+6-) Apague o filme chamado “Anjos Malditos”  e  “A melodia da vida” da tabela FILME. Para isso, utilize um único comando. Faça um rollback em seguida.
+
+	DELETE from Filme 
+	WHERE Titulo = 'Anjos Malditos' OR Titulo = 'A melodia da vida';
+
+	Obs: Esse comando não vai funcionar. Entenda o porque!
+
+
+

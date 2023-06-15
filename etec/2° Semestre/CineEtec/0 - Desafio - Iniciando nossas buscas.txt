@@ -1,0 +1,48 @@
+Desafio:
+
+1- Selecionar todos os atores que comecem com a letra "A".
+
+2- Selecionar a maior duracao dos filmes cadastrados. 
+
+3- Selecionar a menor duracao dos filmes lancado entre os 
+anos 2000 e 2010. 
+
+4- Selecionar os filmes exibibindo apenas aqueles que 
+pertencerem ao genero "Ação".
+
+5- Selecionar os filmes exibindo aqueles que pertecerem 
+ao genero "Drama" e que tenham sido lançados apos o ano 2010.
+
+6- Exibir todos os filmes e seus anos de lancamentos organizando  
+da seguinte maneira (ordem de ano do mais novo para o mais velho e nome do filme em ordem alfabetica).
+
+7- Exibir a soma da duracao de todos os filmes que foram 
+lancados entre 2010 e 2018 e pertecerem ao genero "ficçao"
+
+8- Exibir quantos filmes foram lancados antes do ano 2000.
+
+9- Exibir qual a media de duracao dos filmes lancados apos
+o ano 2000.
+
+10- Quantos filmes pertecem a cada um dos generos.
+
+11- Exibir em ordem alfabetica quais atores e em quais anos nasceram 
+entre 1960 e 1980.
+
+12- Exibir todas informações sobre os atores do mais jovem para o mais velho.
+
+13- Selecionar em quantos filmes o ator numero 1 trabalhou.
+
+14- Selecionar quantos atores trabalharam no filme numero 1.
+
+15- Selecionar quantos filmes foram lancados em cada um dos 
+anos.
+
+16- Exibir quantos diretores pertencem a cada pais.
+
+17- exibir o total de filmes, a soma das durações e a media das duracoes para cada um 
+dos generos de filmes organizando da menor media para a maior.
+
+18- Selecionar todos os filmes que contenham a silaba "DE" no nome e em ordem alfabetica de Z-A.
+
+  

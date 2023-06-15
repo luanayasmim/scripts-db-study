@@ -1,0 +1,113 @@
+SELECT		-- LISTA DE CAMPOS
+FROM		-- NOME DA TABELA
+WHERE		-- CONDICIONAL PARA FILTRAR LINHAS
+ORDER BY	-- CLASSIFICAR/ORDENAR LINHAS RESULTANTES	
+
+1)	Faça uma consulta que apresente todos os filmes da tabela FILME, 
+mostrando apenas seu código e nome.
+
+SELECT	CODFILME, TITULO
+FROM	FILME
+
+
+2)	Selecione todos os filmes da tabela FILME do tipo Aventura. Mostre 
+apenas seu código e nome.
+
+SELECT 	CODFILME, TITULO
+FROM	FILME
+WHERE	CODCATEG = 3
+
+
+3)	Altere a tabela FILME acrescentando uma nova coluna para armazenar 
+o ano de lançamento do filme chamada ANOLANC do tipo numérico de 4 posições 
+inteiras.
+
+ALTER TABLE FILME
+ADD
+(
+ANOLANC NUMBER(4)
+)
+
+
+4)	Mostre todos os empregados da tabela EMP que trabalham no departamento 
+Sales e ganham menos que R$ 2.800,00. Apresente apenas seu código, nome, 
+salário e departamento.
+
+SELECT 	EMPNO, ENAME, SAL, DEPTNO
+FROM	EMP
+WHERE	DEPTNO = 30 AND SAL < 2800
+
+
+5)	Faça uma consulta que apresente todos os campos da tabela FILME, porém, 
+apenas para os filmes do tipo Aventura e Comédia, classificados pela sua 
+categoria.
+
+SELECT 	 *
+FROM	 FILME
+WHERE	 CODCATEG = 1 OR CODCATEG = 3
+ORDER BY CODCATEG
+-- OU
+SELECT 	 *
+FROM	 FILME
+WHERE	 CODCATEG IN (1, 3)
+ORDER BY CODCATEG
+
+
+6)	Altere o nome do campo ENDERECO da tabela CLIENTE para END.
+
+ALTER TABLE CLIENTE RENAME COLUMN ENDERECO TO END
+
+
+7)	Um novo filme deve ser adicionado na tabela FILME. Seus dados são: 
+Código: 9	Nome: 10.000 A.C.	Categoria: Aventura
+
+INSERT INTO FILME
+(CODFILME, TITULO, CODCATEG) -- OPCIONAL
+VALUES
+(9, '10.000 A.C.', 3)
+-- OU
+INSERT INTO FILME
+VALUES
+(9, '10.000 A.C.', 3, NULL)
+
+
+8)	O empregado JONES mudou de departamento. Ele estava alocado no 
+departamento RESEARCH e foi transferido para o departamento SALES. Faça essa 
+alteração na base de dados. 
+
+UPDATE EMP
+SET
+DEPTNO = 30
+WHERE EMPNO = 7566
+
+
+9)	Efetive todas as transações pendentes no banco.
+
+COMMIT
+
+
+10)	Apague todos os empregados da tabela EMP que trabalham no departamento 
+ACCOUNTING.
+
+DELETE FROM EMP
+WHERE DEPTNO = 10
+
+
+11)	A coluna PRENOME da tabela CLIENTE precisa ser aumentada de 50 para 70 
+posições. Faça essa alteração na base de dados.
+
+ALTER TABLE CLIENTE
+MODIFY
+(
+PRENOME VARCHAR(70)
+)
+
+
+12)	O exercício nº 10 excluiu os empregados do departamento ACCOUNTING, porém,
+essa operação não deveria ter acontecido. Execute o comando que desfaz as 
+transações pendentes no banco e verifique se os registros excluídos foram 
+recuperados.
+
+ROLLBACK
+
+
